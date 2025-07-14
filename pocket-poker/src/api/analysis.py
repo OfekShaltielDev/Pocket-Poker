@@ -12,8 +12,8 @@ matplotlib.use('agg')
 
 #url and key for our database and then allowing ourselves to create a client object to make queries to the database
 
-url = "https://hplnxayyijxebyklpoiz.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbG54YXl5aWp4ZWJ5a2xwb2l6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk0MTQyMjcsImV4cCI6MjAyNDk5MDIyN30.8XJMoHKCQp_dWVaK1p73HtUQlGWWEz2hu-nAi7gNr8s"
+url = "key 1"
+key = "key 2"
 supabase: Client = create_client(url, key)
 
 hands = {"Royal Flush" : 100, "Straight Flush" : 90, "Four of a Kind" : 80, "Full House" : 70, "Flush" : 60, "Straight": 50, "Three of a Kind" : 40, "Two Pair" : 30, "One Pair" : 20, "High Card" : 10}
