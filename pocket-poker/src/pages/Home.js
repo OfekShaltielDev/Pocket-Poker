@@ -11,7 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 //     codeUrl: "Build/poker-webgl.wasm",
 //   });
 
-const supabase = createClient("https://hplnxayyijxebyklpoiz.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbG54YXl5aWp4ZWJ5a2xwb2l6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk0MTQyMjcsImV4cCI6MjAyNDk5MDIyN30.8XJMoHKCQp_dWVaK1p73HtUQlGWWEz2hu-nAi7gNr8s");
+const supabase = createClient("key1 here", "key 2 here");
 
 export const Home = () => {
     const { unityProvider, addEventListener, removeEventListener } =
