@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -7,31 +7,39 @@ import Dropdown from 'react-bootstrap/Dropdown'; // Import Dropdown component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavigationBar.css';
 import { createClient } from "@supabase/supabase-js"
-const supabase = createClient("key 1", "key 2")
+
+const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
 function NavigationBar() {
   const [userSession, setUserSession] = useState(null)
   const [user, setUser] = useState(null)
   const [logoutStatus, setLogoutStatus] = useState('')
 
-  // Fetches user data to change the sign in / sign out dropdown
-  const onButtonHover = async() => {
-    // You'll update this function later...
-    const {session} = supabase.auth.getSession()
-    const { data: { user }, error } = await supabase.auth.getUser()
-    try {
-      if(error) {
-        console.log(error)
-      }
-      if(user){
-        setUser(user)
-      } else {
-        setUser(null)
-      }
-    } catch(e) {
-      console.log(e)
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
     }
-  }
+    fetchUser()
+  }, [])
+
+  // Fetches user data to change the sign in / sign out dropdown
+  // const onButtonHover = async() => {
+  //   const {session} = supabase.auth.getSession()
+  //   const { data: { user }, error } = await supabase.auth.getUser()
+  //   try {
+  //     if(error) {
+  //       console.log(error)
+  //     }
+  //     if(user){
+  //       setUser(user)
+  //     } else {
+  //       setUser(null)
+  //     }
+  //   } catch(e) {
+  //     console.log(e)
+  //   }
+  // }
 
   const onLogoutButtonClick = async() => {
      const {error} = await supabase.auth.signOut() 
@@ -43,16 +51,19 @@ function NavigationBar() {
     
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
+        <Navbar.Brand href="/">
+          <img src="/logo.svg" alt="Pocket Poker Logo" width="125" height="125" className="d-inline-block align-top" />
+        </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <ul className='nav-li'>
-              <li><Nav.Link href="/">Home</Nav.Link></li>
+              <li><Nav.Link href="/">Pocket Poker</Nav.Link></li>
               <li><Nav.Link href="/SB">SB</Nav.Link></li>
               <li><Nav.Link href="/Report">Report</Nav.Link></li>
             </ul>
             {/* Use Dropdown component instead of NavDropdown */}
             <Dropdown>
-              <Dropdown.Toggle onMouseEnter={onButtonHover} variant="secondary" id="dropdown-basic">
+              <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                 { user ? 'Logout' : 'Log In/Sign Up' }
               </Dropdown.Toggle>
               <Dropdown.Menu className="dropdown-menu-right">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createClient } from "@supabase/supabase-js"
-const supabase = createClient("key 1", "key 2");
+const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 const Register = (props) => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
@@ -16,7 +16,6 @@ const Register = (props) => {
   const navigate = useNavigate()
 
   const onButtonClick = async() => {
-    // You'll update this function later...
     if(email.indexOf("@") === -1 || email.indexOf('.') === -1) {
         setEmailError("Error: not a valid email address")
         return;

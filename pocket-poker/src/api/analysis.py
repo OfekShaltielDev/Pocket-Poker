@@ -12,8 +12,8 @@ matplotlib.use('agg')
 
 #url and key for our database and then allowing ourselves to create a client object to make queries to the database
 
-url = "key 1"
-key = "key 2"
+url = os.getenv("REACT_APP_SUPABASE_URL")
+key = os.getenv("REACT_APP_SUPABASE_ANON_KEY")
 supabase: Client = create_client(url, key)
 
 hands = {"Royal Flush" : 100, "Straight Flush" : 90, "Four of a Kind" : 80, "Full House" : 70, "Flush" : 60, "Straight": 50, "Three of a Kind" : 40, "Two Pair" : 30, "One Pair" : 20, "High Card" : 10}
